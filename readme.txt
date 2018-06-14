@@ -105,6 +105,10 @@ Developers: please drop new topics here, the text will be moved to [qTranslate-X
 
 ## Upgrade Notice ##
 
+### 3.4.9.1 ###
+Fix for wp-json rest api
+Fix for undefined wp-path variable with wp-json request
+
 ### 3.4.8 ###
 Introducing new date/time handling method based on the latest WordPress implementation of date/time translation.
 

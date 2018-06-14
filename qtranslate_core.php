@@ -65,12 +65,15 @@ function qtranxf_init_language() {
 	$q_config['language'] = apply_filters('qtranslate_language', $url_info['language'], $url_info);
 	//qtranxf_dbg_log('qtranxf_init_language: detected: url_info: ',$url_info);
 
-	$is_rest = !empty($url_info['path']) && strpos($url_info['path'], '/wp-json') === 0;
+	// check is requested wp rest api
+	$wp_is_rest = !empty($url_info['path']) && strpos($url_info['path'], '/wp-json') === 0;
+
+	// check if wp-path is defined
 	if (empty($url_info['wp-path'])) {
 		$url_info['wp-path'] = $url_info['path'];
 	}
 
-	if( $q_config['url_info']['doing_front_end'] && qtranxf_can_redirect() ){
+	if( $q_config['url_info']['doing_front_end'] && qtranxf_can_redirect() && !$wp_is_rest){
 		$lang = $q_config['language'];
 		$url_orig = $url_info['scheme'].'://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 		$url_lang = qtranxf_convertURL('',$lang);//uses $q_config['url_info'] and caches information, which will be needed later anyway.

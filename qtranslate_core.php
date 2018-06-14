@@ -65,6 +65,11 @@ function qtranxf_init_language() {
 	$q_config['language'] = apply_filters('qtranslate_language', $url_info['language'], $url_info);
 	//qtranxf_dbg_log('qtranxf_init_language: detected: url_info: ',$url_info);
 
+	$is_rest = !empty($url_info['path']) && strpos($url_info['path'], '/wp-json') === 0;
+	if (empty($url_info['wp-path'])) {
+		$url_info['wp-path'] = $url_info['path'];
+	}
+
 	if( $q_config['url_info']['doing_front_end'] && qtranxf_can_redirect() ){
 		$lang = $q_config['language'];
 		$url_orig = $url_info['scheme'].'://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
